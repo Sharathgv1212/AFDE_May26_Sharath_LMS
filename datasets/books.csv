@@ -1,0 +1,33 @@
+book_id,title,author,category,isbn
+1,Clean Code,Robert C. Martin,Technology,9780132350884
+2,The Pragmatic Programmer,Andrew Hunt,Technology,9780201616224
+3,Designing Data-Intensive Applications,Martin Kleppmann,Technology,9781449373320
+4,Refactoring,Martin Fowler,Technology,9780134757599
+5,Domain-Driven Design,Eric Evans,Technology,9780321125217
+6,Code Complete,Steve McConnell,Technology,9780735619678
+7,To Kill a Mockingbird,Harper Lee,Fiction,9780061120084
+8,1984,George Orwell,Fiction,9780451524935
+9,The Great Gatsby,F. Scott Fitzgerald,Fiction,9780743273565
+10,Pride and Prejudice,Jane Austen,Fiction,9780141439518
+11,The Catcher in the Rye,J.D. Salinger,Fiction,9780316769488
+12,Brave New World,Aldous Huxley,Fiction,9780060850524
+13,A Brief History of Time,Stephen Hawking,Science,9780553380163
+14,The Selfish Gene,Richard Dawkins,Science,9780192860927
+15,Cosmos,Carl Sagan,Science,9780345539434
+16,The Gene,Siddhartha Mukherjee,Science,9781476733524
+17,Sapiens,Yuval Noah Harari,History,9780062316097
+18,"Guns, Germs, and Steel",Jared Diamond,History,9780393317558
+19,The Silk Roads,Peter Frankopan,History,9781101912379
+20,Steve Jobs,Walter Isaacson,Biography,9781451648539
+21,Long Walk to Freedom,Nelson Mandela,Biography,9780316548182
+22,Becoming,Michelle Obama,Biography,9781524763138
+23,Einstein: His Life and Universe,Walter Isaacson,Biography,9780743264747
+24,Charlie and the Chocolate Factory,Roald Dahl,Children,9780142410318
+25,Matilda,Roald Dahl,Children,9780142410370
+26,"The Lion, the Witch and the Wardrobe",C.S. Lewis,Children,9780064404990
+27,Atomic Habits,James Clear,Non-Fiction,9780735211292
+28,"Thinking, Fast and Slow",Daniel Kahneman,Non-Fiction,9780374533557
+29,Outliers,Malcolm Gladwell,Non-Fiction,9780316017930
+30,Educated,Tara Westover,Non-Fiction,9780399590504
+1,Clean Code,Robert C. Martin,Technology,9780132350884
+7,To Kill a Mockingbird,Harper Lee,Fiction,9780061120084

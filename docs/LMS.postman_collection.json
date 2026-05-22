@@ -1,0 +1,177 @@
+{
+  "info": {
+    "name": "Library Management System API",
+    "_postman_id": "lms-phase1-collection",
+    "description": "Phase 1 capstone — full coverage including positive, 422, and 404 cases. Set the `baseUrl` collection variable (default http://localhost:8000).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8000" },
+    { "key": "bookId", "value": "1" },
+    { "key": "borrowerId", "value": "1" },
+    { "key": "transactionId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Meta",
+      "item": [
+        { "name": "Health", "request": { "method": "GET", "url": "{{baseUrl}}/health" } },
+        { "name": "Root",   "request": { "method": "GET", "url": "{{baseUrl}}/" } }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        { "name": "List books",       "request": { "method": "GET", "url": "{{baseUrl}}/books" } },
+        { "name": "Book stats",       "request": { "method": "GET", "url": "{{baseUrl}}/books/stats" } },
+        { "name": "Get book by id",   "request": { "method": "GET", "url": "{{baseUrl}}/books/{{bookId}}" } },
+        {
+          "name": "Create book (positive)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/books",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"The Mythical Man-Month\",\n  \"author\": \"Frederick P. Brooks Jr.\",\n  \"category\": \"Technology\",\n  \"isbn\": \"9780201835953\"\n}" }
+          }
+        },
+        {
+          "name": "Create book (422 — bad category)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/books",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"X\",\n  \"author\": \"Y\",\n  \"category\": \"NotACategory\",\n  \"isbn\": \"9780000000000\"\n}" }
+          }
+        },
+        {
+          "name": "Update book",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/books/{{bookId}}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"title\": \"Clean Code (Updated)\" }" }
+          }
+        },
+        {
+          "name": "Update book (404)",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/books/99999",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"title\": \"X\" }" }
+          }
+        },
+        {
+          "name": "Delete book (404)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/books/99999" }
+        }
+      ]
+    },
+    {
+      "name": "Borrowers",
+      "item": [
+        { "name": "List borrowers", "request": { "method": "GET", "url": "{{baseUrl}}/borrowers" } },
+        { "name": "Get borrower",   "request": { "method": "GET", "url": "{{baseUrl}}/borrowers/{{borrowerId}}" } },
+        {
+          "name": "Create borrower",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/borrowers",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"borrower_name\": \"Test User\",\n  \"email\": \"test.user@example.com\",\n  \"phone\": \"+919876543210\"\n}" }
+          }
+        },
+        {
+          "name": "Create borrower (422 — bad email)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/borrowers",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"borrower_name\": \"Bad\",\n  \"email\": \"not-an-email\",\n  \"phone\": \"+91 1234\"\n}" }
+          }
+        },
+        {
+          "name": "Update borrower",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/borrowers/{{borrowerId}}",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"phone\": \"+919812345678\" }" }
+          }
+        },
+        {
+          "name": "Delete borrower (404)",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/borrowers/99999" }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        { "name": "List",          "request": { "method": "GET", "url": "{{baseUrl}}/transactions" } },
+        { "name": "Active only",   "request": { "method": "GET", "url": "{{baseUrl}}/transactions?active_only=true" } },
+        { "name": "Stats",         "request": { "method": "GET", "url": "{{baseUrl}}/transactions/stats" } },
+        { "name": "Recent (5)",    "request": { "method": "GET", "url": "{{baseUrl}}/transactions/recent?limit=5" } },
+        {
+          "name": "Borrow",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/borrow",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"book_id\": {{bookId}}, \"borrower_id\": {{borrowerId}} }" }
+          }
+        },
+        {
+          "name": "Borrow (404 — bad book)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/borrow",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"book_id\": 99999, \"borrower_id\": 1 }" }
+          }
+        },
+        {
+          "name": "Return",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/return",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"transaction_id\": {{transactionId}} }" }
+          }
+        },
+        {
+          "name": "Return (404)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/return",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"transaction_id\": 99999 }" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        { "name": "Keyword",          "request": { "method": "GET", "url": "{{baseUrl}}/search?q=orwell" } },
+        { "name": "By title",         "request": { "method": "GET", "url": "{{baseUrl}}/search?title=clean" } },
+        { "name": "By author",        "request": { "method": "GET", "url": "{{baseUrl}}/search?author=harari" } },
+        { "name": "By category",      "request": { "method": "GET", "url": "{{baseUrl}}/search?category=Technology" } },
+        { "name": "Available only",   "request": { "method": "GET", "url": "{{baseUrl}}/search?available=true" } }
+      ]
+    },
+    {
+      "name": "Analytics (Phase 2)",
+      "item": [
+        { "name": "Summary",              "request": { "method": "GET",  "url": "{{baseUrl}}/analytics/summary" } },
+        { "name": "Popular books",        "request": { "method": "GET",  "url": "{{baseUrl}}/analytics/popular-books?limit=10" } },
+        { "name": "Category borrowing",   "request": { "method": "GET",  "url": "{{baseUrl}}/analytics/category-borrowing" } },
+        { "name": "Monthly trends",       "request": { "method": "GET",  "url": "{{baseUrl}}/analytics/monthly-trends" } },
+        { "name": "Overdue (all)",        "request": { "method": "GET",  "url": "{{baseUrl}}/analytics/overdue" } },
+        { "name": "Overdue (active only)","request": { "method": "GET",  "url": "{{baseUrl}}/analytics/overdue?status=Active Overdue" } },
+        { "name": "Recent ETL runs",      "request": { "method": "GET",  "url": "{{baseUrl}}/analytics/runs?limit=5" } },
+        { "name": "Refresh ETL",          "request": { "method": "POST", "url": "{{baseUrl}}/analytics/refresh" } }
+      ]
+    }
+  ]
+}

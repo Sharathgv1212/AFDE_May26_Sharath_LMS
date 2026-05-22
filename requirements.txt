@@ -1,0 +1,13 @@
+# Capstone Phase 1 + Phase 2 — runtime dependencies.
+# Versions use >= because Python 3.14 wheels are still rolling out for
+# some libraries; pinning to exact older versions breaks on 3.14.
+
+# ---- Phase 1: API backend ----
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+sqlalchemy>=2.0.36
+pydantic>=2.9.0
+pydantic[email]>=2.9.0
+
+# ---- Phase 2: ETL pipeline ----
+pandas>=2.2.0
